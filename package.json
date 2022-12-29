@@ -1,20 +1,20 @@
 {
-  "name": "hoit-js-hw-08",
+  "name": "goit-js-hw-08",
   "version": "0.0.1",
   "description": "",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /parcel-project-template/"
+    "build": "parcel build src/*.html --public-url /goit-js-hw-08/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/goitacademy/parcel-project-template.git"
+    "url": "git+https://github.com/zurek28/goit-js-hw-08.git"
   },
   "keywords": [],
   "author": "Alexander Repeta <alexander.repeta@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/goitacademy/parcel-project-template/issues"
+    "url": "https://github.com/zurek28/goit-js-hw-08/issues"
   },
   "dependencies": {
     "@vimeo/player": "^2.18.0",

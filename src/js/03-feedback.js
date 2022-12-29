@@ -1,8 +1,14 @@
 import _ from 'lodash';
 
+const form = document.querySelector('.feedback-form');
 const email = document.querySelector('input[name="email"]');
 const message = document.querySelector('textarea[name="message"]');
-const submitForm = document.querySelector('.feedback-form');
+
+const formElementsArray = Array.from(form);
+
+if (localStorage['feedback-form-state-message'] !== '') {
+  message.textContent = localStorage['feedback-form-state-message'];
+}
 
 if (
   localStorage['feedback-form-state-email'] === '' ||
@@ -13,32 +19,28 @@ if (
   email.setAttribute('value', localStorage['feedback-form-state-email']);
 }
 
-if (localStorage['feedback-form-state-message'] !== '') {
-  message.textContent = localStorage['feedback-form-state-message'];
-}
+form.addEventListener('input', e => {
+  formElementsArray.forEach(function (el) {
+    if (el.value !== '') {
+      localStorage.setItem(`feedback-form-state-${el.name}`, el.value);
+    }
+  });
+});
 
-email.addEventListener(
-  'input',
-  _.throttle(e => {
-    localStorage.setItem('feedback-form-state-email', e.target.value.trim());
-  }, 500)
-);
-
-message.addEventListener(
-  'input',
-  _.throttle(e => {
-    localStorage.setItem('feedback-form-state-message', e.target.value.trim());
-  }, 500)
-);
-
-submitForm.addEventListener('submit', () => {
+form.addEventListener('submit', e => {
+  e.preventDefault();
   console.log(
     `Email: ${localStorage.getItem(
       'feedback-form-state-email'
     )}, Message: ${localStorage.getItem('feedback-form-state-message')}`
   );
 
-  // console.log(localStorage);
+  localStorage.removeItem('feedback-form-state-email');
+  localStorage.removeItem('feedback-form-state-message');
 
-  localStorage.clear();
+  formElementsArray.forEach(function (el) {
+    if (el.value !== '') {
+      el.value = '';
+    }
+  });
 });

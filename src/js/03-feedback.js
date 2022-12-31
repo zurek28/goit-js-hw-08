@@ -29,18 +29,17 @@ form.addEventListener('input', e => {
 
 form.addEventListener('submit', e => {
   e.preventDefault();
-  console.log(
-    `Email: ${localStorage.getItem(
-      'feedback-form-state-email'
-    )}, Message: ${localStorage.getItem('feedback-form-state-message')}`
-  );
+  let data = {};
 
   localStorage.removeItem('feedback-form-state-email');
   localStorage.removeItem('feedback-form-state-message');
 
   formElementsArray.forEach(function (el) {
     if (el.value !== '') {
+      data[el.name] = el.value;
       el.value = '';
     }
   });
+
+  console.log(data);
 });

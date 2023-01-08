@@ -1,3 +1,4 @@
+'use strict';
 import _ from 'lodash';
 
 const form = document.querySelector('.feedback-form');
@@ -8,12 +9,8 @@ if (localStorage.getItem('feedback-form-state') !== null) {
   let tempData = JSON.parse(localStorage['feedback-form-state']);
 
   formElementsArray.forEach(function (el) {
-    for (key in tempData) {
-      if (key !== '' || key !== undefined) {
-        if (key == el.name) {
-          el.value = tempData[key];
-        }
-      }
+    if (tempData[el.name] && tampData[el.name] != '') {
+      el.value = tempData[el.name];
     }
   });
 }
@@ -31,7 +28,9 @@ form.addEventListener('input', e => {
 
 form.addEventListener('submit', e => {
   e.preventDefault();
-  console.log(JSON.parse(localStorage['feedback-form-state']));
+  if (localStorage['feedback-from-state'] !== null) {
+    console.log(JSON.parse(localStorage['feedback-form-state']));
+  }
 
   localStorage.removeItem('feedback-form-state');
 
